@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sort Houses by Type</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Sort Houses by Type</h1>
+
+<form th:action="@{/houses/houseType}" method="GET">
+    <label for="houseType">House Type:</label>
+    <select id="houseType" name="houseType">
+        <option value="APP">Apartment</option>
+        <option value="HOUSE">House</option>
+        <option value="COUNTRY_HOUSE">Country House</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<h2>Sorted Houses</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>House ID</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Room</th>
+        <th>Country</th>
+        <th>Description</th>
+        <th>Is Booked</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="house : ${houseType}">
+        <td th:text="${house.id}"></td>
+        <td th:text="${house.address}"></td>
+        <td th:text="${house.price}"></td>
+        <td th:text="${house.room}"></td>
+        <td th:text="${house.country}"></td>
+        <td th:text="${house.description}"></td>
+        <td th:text="${house.isBooked}"></td>
+        <td th:text="${house.image}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

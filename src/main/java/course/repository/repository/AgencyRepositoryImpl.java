@@ -1,10 +1,15 @@
 package course.repository.repository;
 
 import course.entity.Agency;
+import course.entity.Customer;
+import course.entity.House;
 import course.repository.AgencyRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
@@ -15,9 +20,7 @@ import java.util.List;
 @Repository
 @Transactional
 public class AgencyRepositoryImpl implements AgencyRepository {
-//remake repository
 
-//    I - Agency дe канча house жана customer бар экенин чыгара алышыбыз керек, (саны)
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -40,7 +43,7 @@ public class AgencyRepositoryImpl implements AgencyRepository {
             if (agency.getId().equals(id)) {
                 return agency;
             } else {
-                throw new MyException("Agent of this" + id + "was not found");
+                throw new MyException("Not found");
             }
         } catch (MyException e) {
             System.err.println(e.getMessage());
@@ -57,7 +60,6 @@ public class AgencyRepositoryImpl implements AgencyRepository {
     public void updateAgency(Long id, Agency agency) {
         try {
             Agency agency1 = entityManager.find(Agency.class, id);
-            boolean isFalse = true;
             if (agency1.getId().equals(id)) {
                 agency1.setName(agency.getName());
                 agency1.setCountry(agency.getCountry());
@@ -65,9 +67,8 @@ public class AgencyRepositoryImpl implements AgencyRepository {
                 agency1.setEmail(agency.getEmail());
                 agency1.setImage(agency.getImage());
                 entityManager.merge(agency1);
-                isFalse = false;
             } else {
-                throw new MyException("Agent of this" + id + "was not found");
+                throw new MyException("Not found");
 
             }
         } catch (MyException e) {
@@ -82,8 +83,7 @@ public class AgencyRepositoryImpl implements AgencyRepository {
             if (agency.getId().equals(id)) {
                 entityManager.remove(agency);
             } else {
-                throw new MyException("Agent of this"
-                        + id + "was not found");
+                throw new MyException("Not found");
             }
         } catch (MyException e) {
             System.out.println(e.getMessage());
@@ -96,5 +96,23 @@ public class AgencyRepositoryImpl implements AgencyRepository {
         return entityManager.createQuery("select u from Agency u where u.name ilike :word", Agency.class)
                 .setParameter("word", "%" + word + "%")
                 .getResultList();
+    }
+
+    public Long getTotalHouseCount() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
+        Root<House> root = query.from(House.class);
+        query.select(criteriaBuilder.count(root));
+
+        return entityManager.createQuery(query).getSingleResult();
+    }
+
+    public Long getTotalCustomerCount() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
+        Root<Customer> root = query.from(Customer.class);
+        query.select(criteriaBuilder.count(root));
+
+        return entityManager.createQuery(query).getSingleResult();
     }
 }

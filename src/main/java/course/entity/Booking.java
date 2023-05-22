@@ -25,8 +25,8 @@ public class Booking {
             allocationSize = 1)
 
     private Long id;
-    @OneToMany(cascade = {REMOVE,REFRESH, PERSIST, DETACH})
-    List<Customer> customer_id;
+    @ManyToOne(cascade = {REMOVE,REFRESH, PERSIST, DETACH})
+    Customer customer_id;
     @OneToOne(cascade = {REMOVE,REFRESH, PERSIST, DETACH})
     House house_id;
 }

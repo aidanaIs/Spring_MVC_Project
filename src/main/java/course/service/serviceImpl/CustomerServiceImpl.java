@@ -42,4 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomerById(Long id) {
     customerRepository.deleteCustomerById(id);
     }
+
+    @Override
+    public void assign(Long idC, Long idA) {
+        customerRepository.assign(idC, idA);
+    }
 }

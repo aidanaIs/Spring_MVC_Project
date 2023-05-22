@@ -20,12 +20,6 @@ public class CustomerApi {
         return "customer/allCustomers";
     }
 
-//    @GetMapping("/{id}")
-//    public String getAgencyById(@PathVariable("id") Long id, Model model) {
-//        model.addAttribute("agency", agencyService.getAgencyById(id));
-//        return "agency/agencyPage";
-//    }
-
 
     @GetMapping("/new")
     public String createCustomer(Model model){

@@ -1,6 +1,5 @@
 package course.entity;
 
-import course.entity.enums.HouseType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +27,7 @@ public class House {
             sequenceName = "house_seq",
             allocationSize = 1)
     private Long id;
-    @Enumerated
-    private HouseType houseType;
+    private String houseType;
     private String address;
     private int price;
     private int room;
@@ -38,10 +36,10 @@ public class House {
     private boolean isBooked;
     private String image;
 
-    @OneToMany(cascade = {REFRESH, PERSIST,REMOVE})
+    @OneToMany(cascade = {DETACH, MERGE, REFRESH, PERSIST})
     private List<Agency> agency;
 
-    @OneToOne(cascade= {REFRESH, PERSIST,REMOVE})
+    @OneToOne(cascade= ALL)
     private Booking booking;
 
 }

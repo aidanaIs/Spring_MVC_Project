@@ -48,4 +48,14 @@ public class AgencyServiceImpl implements AgencyService {
     public List<Agency> searchAgency(String word) {
         return agencyRepository.searchAgency(word);
     }
+
+    @Override
+    public Long getTotalHouseCount() {
+        return agencyRepository.getTotalHouseCount();
+    }
+
+    @Override
+    public Long getTotalCustomerCount() {
+        return agencyRepository.getTotalCustomerCount();
+    }
 }

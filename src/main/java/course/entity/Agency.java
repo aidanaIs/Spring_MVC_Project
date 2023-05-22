@@ -31,6 +31,8 @@ public class Agency {
     private String phoneNumber;
     private String email;
     private String image;
+    private Long counterCustomers=0L;
+    private Long counterHouses=0L;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Customer> customers;

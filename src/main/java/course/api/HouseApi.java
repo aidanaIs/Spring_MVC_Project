@@ -1,8 +1,6 @@
 package course.api;
 
-import course.entity.Agency;
 import course.entity.House;
-import course.entity.enums.HouseType;
 import course.service.HouseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -58,20 +56,16 @@ public class HouseApi {
         return "redirect:/houses";
     }
 
-    @GetMapping("/bookedHouses")
-        public String getBookedHouses(Model model){
-        model.addAttribute("bookedHouses", houseService.getBookedHouses());
-        return "house/bookedHouses";
-        }
+//    @GetMapping("/bookedHouses")
+//        public String getBookedHouses(Model model){
+//        model.addAttribute("bookedHouses", houseService.getBookedHouses());
+//        return "house/bookedHouses";
+//        }
 
     @GetMapping("/houseType")
-    public String sortHouseByType(@RequestParam("HouseType") String houseType, Model model){
-        model.addAttribute("houseType",
-                houseService.sortHouseByHouseType(HouseType.valueOf(houseType)));
+    public String sortHouseByType( String houseType, Model model) {
+        model.addAttribute("houseType", houseService.sortHouseByHouseType(houseType));
         return "house/sortHouse";
     }
-
-
-
 
 }

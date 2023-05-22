@@ -1,5 +1,6 @@
 package course.repository.repository;
 
+import course.entity.Agency;
 import course.entity.Customer;
 import course.repository.CustomerRepository;
 import jakarta.persistence.EntityManager;
@@ -17,8 +18,6 @@ import java.util.List;
 public class CustomerRepositoryImpl implements CustomerRepository {
     @PersistenceContext
     private final EntityManager entityManager;
-
-    //put assign method in
 
     public CustomerRepositoryImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -46,7 +45,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         try {
             List<Customer> customers = entityManager.createQuery("select u from Customer u", Customer.class).getResultList();
             if (customers.isEmpty()) {
-                throw new MyException("While there is no agent");
+                throw new MyException("Not found");
             } else return customers;
         } catch (MyException e) {
             System.out.println(e.getMessage());
@@ -55,7 +54,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
 
-    //check whether you'r gonna use this method
     @Override
     public Customer getCustomerById(Long id) {
         try {
@@ -63,7 +61,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             if (customer.getId().equals(id)) {
                 return customer;
             } else {
-                throw new MyException("Booking of this" + id + "was not found");
+                throw new MyException("Not found");
             }
         } catch (MyException e) {
             System.err.println(e.getMessage());
@@ -85,7 +83,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 asCustomer.setDateOfBirth(customer.getDateOfBirth());
 
             } else {
-                throw new MyException("Customer of this" + id + "was not found");
+                throw new MyException("Not found");
 
             }
         } catch (MyException e) {
@@ -101,10 +99,19 @@ public class CustomerRepositoryImpl implements CustomerRepository {
             if (customer.getId().equals(id)) {
                 entityManager.remove(customer);
             } else {
-                throw new MyException("Customer of this" + id + "was not found");
+                throw new MyException("Not found");
             }
         } catch (MyException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void assign(Long idC, Long idA) {
+        Customer customer = entityManager.find(Customer.class, idC);
+        Agency agency = entityManager.find(Agency.class, idA);
+        customer.getAgencies().add(agency);
+        agency.getCustomers().add(customer);
+        entityManager.persist(customer);
     }
 }

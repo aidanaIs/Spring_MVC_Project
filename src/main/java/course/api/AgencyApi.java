@@ -1,6 +1,7 @@
 package course.api;
 
 import course.entity.Agency;
+import course.entity.Customer;
 import course.service.AgencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -66,4 +67,13 @@ public class AgencyApi {
         return "agency/searchAgencies";
     }
 
+    @GetMapping("/counter")
+    public String showCounters(Model model) {
+        Long totalHouseCount = agencyService.getTotalHouseCount();
+        Long totalCustomerCount = agencyService.getTotalCustomerCount();
+        model.addAttribute("totalHouseCount", totalHouseCount);
+        model.addAttribute("totalCustomerCount", totalCustomerCount);
+
+        return "agency/counter";
+    }
 }

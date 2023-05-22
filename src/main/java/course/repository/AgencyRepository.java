@@ -12,6 +12,9 @@ public interface AgencyRepository {
     void updateAgency(Long id, Agency agency);
     void deleteAgencyById(Long id);
     List<Agency> searchAgency(String word);
+    Long getTotalHouseCount();
+
+    Long getTotalCustomerCount();
 }
 
 

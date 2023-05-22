@@ -39,9 +39,9 @@ public class Customer {
     private LocalDate dateOfBirth;
 
 
-    @ManyToMany(cascade = {REMOVE,REFRESH, PERSIST})
-    private List<Agency> agency;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {DETACH, MERGE,REFRESH, PERSIST})
+    private List<Agency> agencies;
+    @OneToMany(cascade = {DETACH, MERGE,REFRESH, PERSIST})
     private List<Booking> booking;
 
 

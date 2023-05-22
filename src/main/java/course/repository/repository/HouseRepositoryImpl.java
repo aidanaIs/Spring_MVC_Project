@@ -2,7 +2,6 @@ package course.repository.repository;
 
 import course.Exceptions.MyException;
 import course.entity.House;
-import course.entity.enums.HouseType;
 import course.repository.HouseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -99,10 +98,11 @@ public class HouseRepositoryImpl implements HouseRepository {
         return entityManager.createQuery("select h from House h where h.isBooked", House.class).getResultList();
     }
 
-    //implement later
-
     @Override
-    public List<House> sortHouseByHouseType(HouseType houseType) {
-        return entityManager.createQuery("select h from House h where h.houseType=:houseType", House.class).setParameter("houseType", houseType).getResultList();
+    public List<House> sortHouseByHouseType(String houseType) { // Change the parameter type to String
+        return entityManager.createQuery("select h from House h where h.houseType = :houseType", House.class)
+                .setParameter("houseType", houseType)
+                .getResultList();
     }
+
 }

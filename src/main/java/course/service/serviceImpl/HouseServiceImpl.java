@@ -1,7 +1,6 @@
 package course.service.serviceImpl;
 
 import course.entity.House;
-import course.entity.enums.HouseType;
 import course.repository.HouseRepository;
 import course.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<House> sortHouseByHouseType(HouseType houseType) {
+    public List<House> sortHouseByHouseType(String houseType) {
         return houseRepository.sortHouseByHouseType(houseType);
     }
 }

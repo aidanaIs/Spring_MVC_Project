@@ -11,7 +11,7 @@
 
 <body>
 <div class="card" style="width: 18rem;" th:object="${house}">
-    <h5>User info</h5>
+    <h5>House info</h5>
     <img th:src="${house.getImage()}" class="card-img-top" alt="User's photo">
     <div class="card-body">
         <h5 class="card-title" th:text="${house.getAddress()}">Full Name</h5>
