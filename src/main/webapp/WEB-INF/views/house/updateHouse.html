@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update House</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/houses/updateHouse/{id} (id=${editHouse.getId()})}"
+      th:object="${editHouse}">
+  <div>
+    <label for="address">Address</label>
+    <input type="text" th:field="*{address}" id="address">
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <input type="text" th:field="*{description}" id="description">
+  </div>
+
+  <div>
+    <label for="country">Country</label>
+    <input type="text" th:field="*{country}" id="country">
+  </div>
+
+  <!--    <div>-->
+  <!--        <label for="agency">Agency</label>-->
+  <!--        <input type="text" th:field="*{agency}" id="agency">-->
+  <!--    </div>-->
+
+  <div>
+    <label for="price">Price</label>
+    <input type="text" th:field="*{price}" id="price">
+  </div>
+
+  <div>
+    <label for="room">Room</label>
+    <input type="text" th:field="*{room}" id="room">
+  </div>
+
+
+  <div>
+    <label for="image">Image</label>
+    <input type="text" th:field="*{image}" id="image">
+  </div>
+
+  <div>
+    <label for="houseType">HouseType</label>
+    <input type="text" th:field="*{houseType}" id="houseType">
+  </div>
+  <!--    <div>-->
+  <!--        <label for="booking">Booking</label>-->
+  <!--        <input type="text" th:field="*{booking}" id="booking">-->
+  <!--    </div>-->
+
+  <button type="submit">
+    Update button
+  </button>
+
+</form>
+</body>
+</html>

@@ -16,7 +16,7 @@ public class AgencyApi {
     private final AgencyService agencyService;
 
     @GetMapping
-    private String getAllAgencies(Model model){
+    public String getAllAgencies(Model model){
         model.addAttribute("agencies", agencyService.getAllAgencies());
         return "agency/mainPage";
     }
